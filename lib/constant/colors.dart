@@ -1,0 +1,10 @@
+
+const List<int> REMINDER_COLOR = [
+  0xFF9BF8EF,
+  0xFF9BBCF8,
+  0xFFC69BF8,
+  0xFFFFC1D7,
+  0xFFFAB695,
+];
+
+const int PRIMARY_COLOR = 0XFFFF9CBF;

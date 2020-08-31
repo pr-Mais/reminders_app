@@ -1,0 +1,3 @@
+class DBService {
+  const DBService ();
+}
