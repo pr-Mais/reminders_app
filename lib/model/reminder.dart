@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Reminder {
-  int color;
+  Color color;
   String content;
   TimeOfDay time;
   Repeat repeat;

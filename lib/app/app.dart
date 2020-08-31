@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reminders_app/constant/colors.dart';
 
 import 'pages/home.dart';
 
@@ -8,13 +7,12 @@ class ReminderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Reminder',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(PRIMARY_COLOR),
         canvasColor: Colors.white,
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Color(PRIMARY_COLOR),
-        ),
-        splashColor: Colors.grey[200],
+        primarySwatch: Colors.deepPurple,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: Colors.grey[900]),
+        splashColor: Colors.white12,
         highlightColor: Colors.transparent,
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(),

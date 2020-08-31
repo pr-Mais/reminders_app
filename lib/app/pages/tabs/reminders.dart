@@ -15,18 +15,20 @@ class _RemindersPageState extends State<RemindersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
         title: Text(
           "My reminders",
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
-          ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
       body: ListView.builder(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.symmetric(
+          vertical: 40,
+          horizontal: 20,
+        ),
         itemCount: modalData.length,
         itemBuilder: (context, index) {
           return ReminderListItem(

@@ -106,7 +106,7 @@ class ReminderListItem extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(reminder.color),
+                      color: reminder.color,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(radius),
                           topLeft: Radius.circular(radius)),

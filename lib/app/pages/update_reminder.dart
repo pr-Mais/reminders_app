@@ -35,13 +35,14 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
+        title: Text(
+          _controller.text.isEmpty ? "Add reminder" : "Update reminder",
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _addReminder,
-        label: Text("Add"),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.done),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -51,13 +52,6 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Add reminder",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 25,
-              ),
-            ),
             SizedBox(height: 20),
             _inputLabel("What are you going to do?"),
             SizedBox(height: 10),
@@ -163,7 +157,7 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  for (int color in REMINDER_COLOR) _colorSquare(color)
+                  for (Color color in REMINDER_COLOR) _colorSquare(color)
                 ],
               ),
             ),
@@ -173,12 +167,11 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
     );
   }
 
-  Widget _colorSquare(int colorCode) {
+  Widget _colorSquare(Color color) {
     return GestureDetector(
       onTap: () {
-        print(colorCode);
         setState(() {
-          reminder.color = colorCode;
+          reminder.color = color;
         });
       },
       child: AnimatedContainer(
@@ -186,10 +179,10 @@ class _UpdateReminderPageState extends State<UpdateReminderPage> {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey[200]),
           borderRadius: BorderRadius.circular(4.0),
-          color: Color(colorCode),
+          color: color,
         ),
-        height: reminder.color == colorCode ? 50 : 40,
-        width: reminder.color == colorCode ? 50 : 40,
+        height: reminder.color == color ? 50 : 40,
+        width: reminder.color == color ? 50 : 40,
       ),
     );
   }

@@ -49,11 +49,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           MorePage(),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
+      
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 35,
         currentIndex: index,
