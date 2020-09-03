@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reminders_app/app/pages/update_reminder.dart';
+import 'package:provider/provider.dart';
+import 'package:reminders_app/app/pages/new_reminder.dart';
 import 'package:reminders_app/model/reminder.dart';
+import 'package:reminders_app/services/db.dart';
 
 class ReminderListItem extends StatelessWidget {
   ReminderListItem({
@@ -55,6 +57,10 @@ class ReminderListItem extends StatelessWidget {
       child: Dismissible(
         key: ObjectKey(reminder),
         onDismissed: (direction) {
+          final provider = Provider.of<DBHelper>(context, listen: false);
+          if (direction == DismissDirection.endToStart) {
+            provider.delete(reminder);
+          }
           //TODO implement move reminder to archive
           //TODO also implement delete reminder if moved to other direction
           //moving a reminder to archive will disable its notifications
@@ -106,7 +112,7 @@ class ReminderListItem extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: reminder.color,
+                      color: Color(reminder.color),
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(radius),
                           topLeft: Radius.circular(radius)),
@@ -114,10 +120,29 @@ class ReminderListItem extends StatelessWidget {
                     width: 10.0,
                   ),
                   SizedBox(width: 15),
-                  Text(
-                    reminder.content,
-                    style: TextStyle(fontSize: 18.0),
-                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        reminder.content,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.timer,
+                              size: 18, color: Color(reminder.color)),
+                          SizedBox(width: 8),
+                          Text(
+                              "${Reminder.repeatToString(reminder.repeat)} at ${TimeOfDay.fromDateTime(reminder.time).format(context)}")
+                        ],
+                      )
+                    ],
+                  )
                 ],
               ),
               Padding(
@@ -134,7 +159,7 @@ class ReminderListItem extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => UpdateReminderPage(),
+                            builder: (context) => NewReminderPage(),
                             fullscreenDialog: true,
                             settings: RouteSettings(arguments: reminder)),
                       );

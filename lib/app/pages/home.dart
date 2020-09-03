@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'update_reminder.dart';
+import 'package:provider/provider.dart';
+import 'package:reminders_app/services/db.dart';
+import 'new_reminder.dart';
 import 'tabs/reminders.dart';
 import 'tabs/archive.dart';
 import 'tabs/more.dart';
@@ -21,10 +23,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    final provider =
+        Provider.of<DBHelper>(context, listen: false).getReminders();
+
+    super.didChangeDependencies();
+  }
+
   void _openAddReminderPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => UpdateReminderPage(),
+        builder: (context) => NewReminderPage(),
         fullscreenDialog: true,
       ),
     );
@@ -49,7 +59,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           MorePage(),
         ],
       ),
-      
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 35,
         currentIndex: index,
